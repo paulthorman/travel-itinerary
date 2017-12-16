@@ -8,15 +8,11 @@ var path = require('path');
 var favicon = require('serve-favicon');
 var session = require('express-session');
 
-// added port
-var port = 3000;
-
 // Express settings
 // ==========================
 
 // instantiate our app
 var app = express();
-
 //Sequelize migrations
 var User = require('./models')['User'];
 var Trip = require('./models')['Trip'];
@@ -58,9 +54,9 @@ var methodOverride = require('method-override'); //for deletes in express
 app.use(methodOverride('_method'));
 
 // Our model controllers
-var application_controller = require('./controllers/application_controller.js');
+var application_controller = require('./controllers/application_controller');
 var trips_controller = require('./controllers/trips_controller.js');
-var users_controller = require('./controllers/users_controller.js');
+var users_controller = require('./controllers/users_controller');
 app.use('/', application_controller);
 app.use('/trips', trips_controller);
 app.use('/users', users_controller);
@@ -94,10 +90,7 @@ app.use(function(err, req, res) {
 });
 
 // our module gets exported as app.
-// module.exports = app;
-
-// Initiate the listener.
-app.listen(port);
+module.exports = app;
 
 //listener in bin/www
 //added Procfile
